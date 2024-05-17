@@ -12,32 +12,33 @@ import java.util.List;
 import config.Conexion;
 
 public class ClienteDAO {
+
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int r;
 
-    public Cliente buscar(String dni){
+    public Cliente buscar(String dni) {
         Cliente c = new Cliente();
-        String sql="SELECT * FROM cliente WHERE Dni="+dni;
-        try{
-            con=cn.conexion();
-            ps=con.prepareStatement(sql);
-            rs=ps.executeQuery();
-            while(rs.next()){
+        String sql = "SELECT * FROM cliente WHERE Dni=" + dni;
+        try {
+            con = cn.conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 c.setIdCliente(rs.getInt(1));
                 c.setDni(rs.getString(2));
                 c.setNombres(rs.getString(3));
                 c.setDireccion(rs.getString(4));
                 c.setEstado(rs.getString(5));
             }
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+            System.out.println("Error al buscar cliente: " + e.getMessage());
         }
         return c;
-    }     
-    
+    }
+
     public List listar() {
         String sql = "SELECT * FROM cliente";
         List<Cliente> lista = new ArrayList<>();
@@ -55,7 +56,7 @@ public class ClienteDAO {
                 lista.add(cliente);
             }
         } catch (Exception e) {
-            
+            System.out.println("Error al buscar clientes y agregarlos a la lista: " + e.getMessage());
         }
         return lista;
     }
@@ -71,7 +72,7 @@ public class ClienteDAO {
             ps.setString(4, cliente.getEstado());
             ps.executeUpdate();
         } catch (Exception e) {
-            
+            System.out.println("Error al agregar cliente: " + e.getMessage());
         }
         return r;
     }
@@ -92,7 +93,7 @@ public class ClienteDAO {
                 cliente.setEstado(rs.getString("Estado"));
             }
         } catch (Exception e) {
-            
+            System.out.println("Error al obtener cliente por ID: " + e.getMessage());
         }
         return cliente;
     }
@@ -109,19 +110,19 @@ public class ClienteDAO {
             ps.setInt(5, cliente.getIdCliente());
             ps.executeUpdate();
         } catch (Exception e) {
-            
+            System.out.println("Error al actualizar cliente: " + e.getMessage());
         }
         return r;
     }
 
     public void delete(int id) {
-        String sql="DELETE FROM cliente WHERE IdCliente="+id;
-        try{
-            con=cn.conexion();
-            ps=con.prepareStatement(sql);
+        String sql = "DELETE FROM cliente WHERE IdCliente=" + id;
+        try {
+            con = cn.conexion();
+            ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
-            
+            System.out.println("Error al eliminar cliente: " + e.getMessage());
         }
     }
 }

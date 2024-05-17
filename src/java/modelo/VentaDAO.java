@@ -28,6 +28,7 @@ public class VentaDAO {
                 numeroserie = rs.getString(1);
             }
         } catch (Exception e) {
+            System.out.println("Error al generar el número de serie de ventas: " + e.getMessage());
         }
         return numeroserie;
     }
@@ -43,6 +44,7 @@ public class VentaDAO {
                 idventas = rs.getString(1);
             }
         } catch (Exception e) {
+            System.out.println("Error al obtener ID de ventas: " + e.getMessage());
         }
         return idventas;
     }
@@ -60,6 +62,7 @@ public class VentaDAO {
             ps.setString(6, ve.getEstado());
             ps.executeUpdate();
         } catch (Exception e) {
+            System.out.println("Error al guardar venta: " + e.getMessage());
         }
         return r;
     }
@@ -76,9 +79,8 @@ public class VentaDAO {
             ps.executeUpdate();
 
         } catch (Exception e) {
+            System.out.println("Error al guardar el detalle de la venta: " + e.getMessage());
         }
         return r;
     }
-
-
 }
