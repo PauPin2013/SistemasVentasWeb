@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%HttpSession obj=request.getSession();
+if(obj !=null && obj.getAttribute("usuario")!=null){
+    
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +22,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home </a>
+                        <a style="margin-left: 10px ; border: none " class="nav-link" 
+                           href="Controlador?menu=Home" target="myFrame">Home </a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px ; border: none " class="btn btn-outline-light" 
@@ -67,4 +72,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </body>
 </html>
-
+<%}else{
+         request.getRequestDispatcher("error.html").forward(request, response);
+        }
+%>

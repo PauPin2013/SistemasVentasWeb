@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
 
@@ -79,8 +80,11 @@ public class Validar extends HttpServlet {
             String pass=request.getParameter("txtpass");
             em=edao.validar(user, pass);
             if(em.getUser()!=null){
+                HttpSession mySesion=request.getSession(true);
                 request.setAttribute("usuario", em);
+                mySesion.setAttribute("usuario", em);
                 request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
+                request.getRequestDispatcher("Controlador?menu=Home").forward(request, response);
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 
