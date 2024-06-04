@@ -68,6 +68,7 @@
                             <div class="form-group">
                                 <div class="col-sm">
                                     <button type="submit" name="accion" value="Agregar" class="btn btn-outline-info">Agregar Producto</button>
+                                    <button type="submit" name="accion" value="Actualizar" class="btn btn-outline-info">Actualizar Producto</button>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +117,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <a href="Controlador?menu=NuevaVenta&accion=GenerarVenta" onclick="print()" class="btn btn-success">Generar Venta</a>
-                                <input type="submit" name="accion" value="Cancelar" class="btn btn-danger">
+                                <a href="Controlador?menu=NuevaVenta&accion=Cancelar" class="btn btn-danger">Cancelar</a>
                             </div>
                             <div class="col-sm-6 ml-auto d-felx">
                                 <label class="col-sm-6 text-right mt-2">Total a Pagar</label>

@@ -240,6 +240,7 @@ public class Controlador extends HttpServlet {
                     for (int i = 0; i < lista.size(); i++) {
                         totalPagar = totalPagar + lista.get(i).getSubtotal();
                     }
+                    request.setAttribute("cliente", cliente);
                     request.setAttribute("totalpagar", totalPagar);
                     request.setAttribute("lista", lista);
                     request.setAttribute("nserie", numeroserie);
@@ -256,7 +257,59 @@ public class Controlador extends HttpServlet {
                     for (int i = 0; i < lista.size(); i++) {
                         totalPagar = totalPagar + lista.get(i).getSubtotal();
                     }
-
+                    request.setAttribute("cliente", cliente);
+                    request.setAttribute("totalpagar", totalPagar);
+                    request.setAttribute("lista", lista);
+                    request.setAttribute("nserie", numeroserie);
+                    break;
+                case "Editar":
+                    ide = Integer.parseInt(request.getParameter("id"));
+                    for (Venta v : lista) {
+                        if (v.getItem() == ide) {
+                            prod = new Producto();
+                            prod.setIdProducto(v.getIdproducto());
+                            prod.setNombres(v.getDescripcionP());
+                            prod.setPrecio(v.getPrecio());
+                            prod.setStock(v.getCantidad());
+                            break;
+                        }
+                    }
+                    request.setAttribute("cliente", cliente);
+                    request.setAttribute("producto", prod);
+                    request.setAttribute("totalpagar", totalPagar);
+                    request.setAttribute("lista", lista);
+                    request.setAttribute("nserie", numeroserie);
+                    break;
+                case "Actualizar":
+                    for (Venta v : lista) {
+                        if (v.getItem() == ide) {
+                            cod = prod.getIdProducto();
+                            descripcion = request.getParameter("nomproducto");
+                            precio = Double.parseDouble(request.getParameter("precio"));
+                            cant = Integer.parseInt(request.getParameter("cant"));
+                            subtotal = precio * cant;
+                            v.setIdproducto(cod);
+                            v.setDescripcionP(descripcion);
+                            v.setPrecio(precio);
+                            v.setCantidad(cant);
+                            v.setSubtotal(subtotal);
+                            break;
+                        }
+                    }
+                    totalPagar = 0.0;
+                    for (Venta v : lista) {
+                        totalPagar += v.getSubtotal();
+                    }
+                    request.setAttribute("cliente", cliente);
+                    request.setAttribute("totalpagar", totalPagar);
+                    request.setAttribute("lista", lista);
+                    request.setAttribute("nserie", numeroserie);
+                    break;
+                case "Cancelar":
+                    item = 0;
+                    lista.clear(); 
+                    totalPagar = 0.0;
+                    request.setAttribute("cliente", cliente);
                     request.setAttribute("totalpagar", totalPagar);
                     request.setAttribute("lista", lista);
                     request.setAttribute("nserie", numeroserie);
@@ -292,6 +345,9 @@ public class Controlador extends HttpServlet {
                         vdao.guardarDetalleVentas(vent);
 
                     }
+                    request.setAttribute("cliente", cliente);
+                    request.setAttribute("totalpagar", totalPagar);
+                    request.setAttribute("lista", lista);
                     request.setAttribute("nserie", numeroserie);
                     break;
 
