@@ -15,25 +15,19 @@ public class Empleado {
     String estado;
     String user;
     String nom;
+    String pass;
     
     public Empleado() {
     }
 
-    public Empleado(int id, String dni, String tel, String estado, String user, String nom) {
+    public Empleado(int id, String dni, String tel, String estado, String user, String nom, String pass) {
         this.id = id;
         this.dni = dni;
         this.tel = tel;
         this.estado = estado;
         this.user = user;
         this.nom = nom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+        this.pass = pass;
     }
 
     public int getId() {
@@ -74,6 +68,22 @@ public class Empleado {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
     
 }

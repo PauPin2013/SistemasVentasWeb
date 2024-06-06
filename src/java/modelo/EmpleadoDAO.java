@@ -24,14 +24,14 @@ public class EmpleadoDAO {
     ResultSet rs;
     int r;
 
-    public Empleado validar(String user, String dni) {
+    public Empleado validar(String user, String pass) {
         Empleado em = new Empleado();
-        String sql = "select * from empleado where User=? and Dni=?";
+        String sql = "select * from empleado where User=? and Contraseña=?";
         try {
             con = cn.conexion();
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
-            ps.setString(2, dni);
+            ps.setString(2, pass);
             rs = ps.executeQuery();
             while (rs.next()) {
                 em.setId(rs.getInt("IdEmpleado"));
